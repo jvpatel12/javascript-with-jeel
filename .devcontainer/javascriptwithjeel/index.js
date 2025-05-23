@@ -1,64 +1,32 @@
-// function multiple(num){
-//   return num*5;
-// }
 
-// multiple.power=2
+const p1={
+    fname:"jeel",
+    lname:"patel",
+    age:18,
+};
 
-// console.log(multiple(5));
-// console.log(multiple.prototype);
-// console.log(multiple.power);
+const  p1Proxy = new Proxy(p1,{
+        get(target,prop){
+           if(prop in target) return target[prop];
+           return false; 
+        },
+        set(target,prop,value){
+            if(!(prop in target)) throw new Error(`${prop} does not exists `);
+            switch(prop){
+                case 'fname':
+                case 'lname':
+                    if(typeof value !== 'string') throw new Error(`${prop} must be a string`)
+                break;
+            case 'age':
+                if(typeof value !== 'number') throw new Error(`${prop} must be a number`)
+                if(value<=0) throw new Error(`${prop} must be > zero`)
+            }
+        target[prop] = value
+        }
+});
 
+p1Proxy.age=100;
 
-// function createUser(usename,score){
-//        this.usename =usename
-//        this.score=score
-// }
-//        createUser.prototype.increment = function(){
-//         this.score++;
-//        }
-//        createUser.prototype.printMe = function(){
-//         console.log(`score is ${this.score}`);
-//       }
+console.log(p1Proxy.lname);
+console.log(p1Proxy);
 
-//       const chai = new createUser("chai",25)
-//       const tea = new createUser("tea",250)
-
-//       chai.printMe()
-
-
-      const user ={
-        name:"jeel"
-      }
-      const teacher = {
-        makeVideo: true
-      }
-
-      const teacherSupport = {
-        isAvailable  :  false
-      }
-
-      const Tospport =  {
-        markAssignment :'jsAsiignment',
-        fullTime : true,
-        __proto__:teacherSupport
-      }
-
-      teacher.__proto__=user
-
-      Object.setPrototypeOf(teacherSupport, teacher)
-
-      let another = "jeel patel"
-
-      String.prototype.trueLength = function()
-{
-    console.log(`${this}`);
-    
-    console.log(`${this.name}`);
-
-    console.log(`this is length is:${this.trim().length}`);
-    
-    
-    
-}
-
-another.trueLength()
