@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Patel Jeel Vakeshkumar</h1>
+    <button id="stop"> Stop</button>
+    <script>
+        setTimeout(function(){
+            console.log('jeel Patel');
+        },2000)
+
+        const ChangeText = () =>{
+            document.querySelector('h1').innerHTML="js is best lanugauge"
+        }
+
+        
+
+        const ChangeMe = setTimeout(ChangeText,2000)
+
+        document.querySelector('#stop').addEventListener('click',function(){
+            clearTimeout(ChangeMe)
+            console.log("STOPPED ME");
+            
+        })
+    </script>
+</body>
+</html>
